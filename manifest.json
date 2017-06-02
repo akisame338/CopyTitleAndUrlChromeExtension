@@ -1,0 +1,17 @@
+{
+    "manifest_version": 2,
+    "name": "Copy title and URL",
+    "version": "1.0.0",
+    "description": "表示しているページのタイトルとURLをクリップボードにコピー",
+    "browser_action": {
+    },
+    "content_scripts": [{
+        "matches": ["http://*/*", "https://*/*"],
+        "js": ["js/content.js"]
+    }],
+    "background": {
+        "scripts": ["js/background.js"],
+        "persistent": false
+    },
+    "permissions": ["tabs", "clipboardWrite"]
+}
