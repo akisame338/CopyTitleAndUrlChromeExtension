@@ -13,5 +13,13 @@
         "scripts": ["js/background.js"],
         "persistent": false
     },
-    "permissions": ["tabs", "clipboardWrite"]
+    "permissions": ["tabs", "clipboardWrite", "commands"],
+    "commands": {
+        "copyToClipboard": {
+            "suggested_key": {
+                "default": "Alt+C"
+            },
+            "description": "Copy title and URL"
+        }
+    }
 }

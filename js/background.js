@@ -15,7 +15,17 @@ function copyToClipboard(content) {
     document.execCommand('copy');
 }
 
-chrome.browserAction.onClicked.addListener(function(tab) {
+function copyTitleAndUrlToClipboard(tab) {
     var content = createContent(tab.title, tab.url);
     copyToClipboard(content);
+}
+
+chrome.browserAction.onClicked.addListener(function(tab) {
+    copyTitleAndUrlToClipboard(tab);
+});
+
+chrome.commands.onCommand.addListener(function(command) {
+    chrome.tabs.query({active: true}, function(tabs) {
+        copyTitleAndUrlToClipboard(tabs[0]);
+    });
 });
