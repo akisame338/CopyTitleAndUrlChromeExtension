@@ -25,7 +25,7 @@ chrome.browserAction.onClicked.addListener(function(tab) {
 });
 
 chrome.commands.onCommand.addListener(function(command) {
-    chrome.tabs.query({active: true}, function(tabs) {
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         copyTitleAndUrlToClipboard(tabs[0]);
     });
 });
