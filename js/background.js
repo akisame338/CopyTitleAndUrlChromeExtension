@@ -9,10 +9,24 @@
  *
  * @param  {String} title ページのタイトル
  * @param  {String} url   ページのURL
+ * @param  {String} format_type クリップボードにコピーする形式を表す文字列
  * @return {String} クリップボードにコピーする内容
  */
-function createContent(title, url) {
-    return `${title}\n${url}`;
+function createContent(title, url, format_type) {
+    let content;
+    switch (format_type) {
+        case 'markdown':
+            content = `[${title}](${url})`;
+            break;
+        case 'textile':
+            content = `"${title}":${url}`;
+            break;
+        case 'default':
+        default:
+            content = `${title}\n${url}`;
+            break;
+    }
+    return content;
 }
 
 /**
@@ -28,27 +42,22 @@ function copyToClipboard(content) {
 }
 
 /**
- * 引数で指定されたタブで表示しているページのタイトルとURLをクリップボードにコピー
+ * 引数で指定されたタブで表示しているページのタイトルとURLを指定した形式でクリップボードにコピー
  *
- * @param {Tab} カレントウィンドウのアクティブなタブ
+ * @param {Tab}    カレントウィンドウのアクティブなタブ
+ * @param {String} クリップボードにコピーする形式を表す文字列
  */
-function copyTitleAndUrlToClipboard(tab) {
-    var content = createContent(tab.title, tab.url);
+function copyTitleAndUrlToClipboard(tab, format_type) {
+    var content = createContent(tab.title, tab.url, format_type);
     copyToClipboard(content);
 }
-
-/**
- * アイコンクリック時のイベント
- */
-chrome.browserAction.onClicked.addListener(function(tab) {
-    copyTitleAndUrlToClipboard(tab);
-});
 
 /**
  * ショートカットキー入力時のイベント
  */
 chrome.commands.onCommand.addListener(function(command) {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-        copyTitleAndUrlToClipboard(tabs[0]);
+        const format_type = localStorage.getItem('format_type');
+        copyTitleAndUrlToClipboard(tabs[0], format_type);
     });
 });

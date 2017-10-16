@@ -1,0 +1,24 @@
+.container {
+    width: 120px;
+}
+
+.description {
+    position: relative;
+}
+
+.description::after {
+    content: "";
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    bottom: -2px;
+    border-bottom: 1px solid #000000;
+}
+
+.content {
+    margin-top: 5px;
+}
+
+.format_label {
+    display: block;
+}
