@@ -1,4 +1,4 @@
-(function() {
+(() => {
     const FORMAT_TYPE_DEFAULT  = 'default';
     const FORMAT_TYPE_MARKDOWN = 'markdown';
     const FORMAT_TYPE_TEXTILE  = 'textile';
@@ -9,11 +9,11 @@
 
     // ストレージに値がセットされていない場合（初回起動時を想定）は
     // デフォルト形式（改行区切り）が選択されているものとして扱う
-    chrome.storage.local.get({format_type: null}, function(items) {
+    chrome.storage.local.get({format_type: null}, (items) => {
         let format_type = items.format_type;
         if (format_type === null) {
             format_type = FORMAT_TYPE_DEFAULT;
-            chrome.storage.local.set({format_type: FORMAT_TYPE_DEFAULT}, function(){});
+            chrome.storage.local.set({format_type: FORMAT_TYPE_DEFAULT}, () => {});
         }
 
         switch (format_type) {
@@ -29,14 +29,13 @@
         }
     });
 
-
-    default_format_radio.onchange = function() {
-        chrome.storage.local.set({format_type: FORMAT_TYPE_DEFAULT}, function(){});
+    default_format_radio.onchange = () => {
+        chrome.storage.local.set({format_type: FORMAT_TYPE_DEFAULT}, () => {});
     }
-    markdown_format_radio.onchange = function() {
-        chrome.storage.local.set({format_type: FORMAT_TYPE_MARKDOWN}, function(){});
+    markdown_format_radio.onchange = () => {
+        chrome.storage.local.set({format_type: FORMAT_TYPE_MARKDOWN}, () => {});
     }
-    textile_format_radio.onchange = function() {
-        chrome.storage.local.set({format_type: FORMAT_TYPE_TEXTILE}, function(){});
+    textile_format_radio.onchange = () => {
+        chrome.storage.local.set({format_type: FORMAT_TYPE_TEXTILE}, () => {});
     }
-}());
+})();

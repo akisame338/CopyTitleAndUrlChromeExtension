@@ -1,8 +1,8 @@
-(function() {
+(() => {
     const textarea = document.createElement('textarea');
     textarea.id = 'textarea';
     document.body.appendChild(textarea);
-}());
+})();
 
 /**
  * クリップボードにコピーする内容を生成
@@ -55,9 +55,9 @@ function copyTitleAndUrlToClipboard(tab, format_type) {
 /**
  * ショートカットキー入力時のイベント
  */
-chrome.commands.onCommand.addListener(function(command) {
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-        chrome.storage.local.get({format_type: 'default'}, function(items) {
+chrome.commands.onCommand.addListener((command) => {
+    chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
+        chrome.storage.local.get({format_type: 'default'}, (items) => {
             const format_type = items.format_type;
             copyTitleAndUrlToClipboard(tabs[0], format_type);
         });
