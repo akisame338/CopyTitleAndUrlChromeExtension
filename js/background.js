@@ -1,5 +1,5 @@
 (function() {
-    var textarea = document.createElement('textarea');
+    const textarea = document.createElement('textarea');
     textarea.id = 'textarea';
     document.body.appendChild(textarea);
 }());
@@ -35,7 +35,7 @@ function createContent(title, url, format_type) {
  * @param {String} content クリップボードにコピーする内容
  */
 function copyToClipboard(content) {
-    var textarea = document.getElementById('textarea');
+    const textarea = document.getElementById('textarea');
     textarea.value = content;
     textarea.select();
     document.execCommand('copy');
@@ -48,7 +48,7 @@ function copyToClipboard(content) {
  * @param {String} クリップボードにコピーする形式を表す文字列
  */
 function copyTitleAndUrlToClipboard(tab, format_type) {
-    var content = createContent(tab.title, tab.url, format_type);
+    const content = createContent(tab.title, tab.url, format_type);
     copyToClipboard(content);
 }
 
