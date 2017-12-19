@@ -57,7 +57,9 @@ function copyTitleAndUrlToClipboard(tab, format_type) {
  */
 chrome.commands.onCommand.addListener(function(command) {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-        const format_type = localStorage.getItem('format_type');
-        copyTitleAndUrlToClipboard(tabs[0], format_type);
+        chrome.storage.local.get({format_type: 'default'}, function(items) {
+            const format_type = items.format_type;
+            copyTitleAndUrlToClipboard(tabs[0], format_type);
+        });
     });
 });
